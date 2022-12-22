@@ -7,6 +7,12 @@ helpingmessage = ''
 TOKEN = '5929159617:AAG8Ty7oySL_i8lt09jnRmxG2niU8YeThfU'
 bot = telebot.TeleBot(TOKEN)
 
+def hmtimeswork(n):
+  return (n*4)
+
+def hmtimeshome(m):
+  return (2*int((60//(int(m)))) + 1)
+
 
 @bot.message_handler(commands=['start']) #Первое сообщение
 def startuem(message):
@@ -97,8 +103,9 @@ def narabote(message):
                 stoppingmessage = True
                 kb = telebot.types.ReplyKeyboardMarkup(True, False)
                 kb.add('/settings')
+                c = hmtimeswork(b)
                 while stoppingmessage:
-                    for i in range(0, int(b)*4):
+                    for i in range(0, c):
                         time.sleep(1)
                         helpingmessage = 'Выпрямите спину и разомнитесь.'
                         bot.send_message(
@@ -148,9 +155,9 @@ def doma(message):
           """
           Данная функция обрабатывает сообщение пользователя и использует его для напоминания дома
           """
-            global c
+            global s
             try: #Проверяется, правильный ли тип данных использовал пользователь в сообщениях
-                c = int(message.text)
+                s = int(message.text)
                 error = False
             except:
                 error = True
@@ -158,8 +165,9 @@ def doma(message):
                 stoppingmessage = True
                 kb = telebot.types.ReplyKeyboardMarkup(True, False)
                 kb.add('/home')
+                t = hmtimeshome(s)
                 while stoppingmessage:
-                    for j in range(0, 2*int((60//(int(c)))) + 1):
+                    for j in range(0, t):
                         time.sleep(60*(int(c)))
                         helpingmessage = 'Выпрямите спину и разомнитесь.'
                         bot.send_message(
